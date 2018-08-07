@@ -1,0 +1,56 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @company.name %>
+</p>
+
+<%= link_to 'Edit', edit_company_path(@company) %> |
+<%= link_to 'Back', companies_path %>
+
+<div class="container">
+  <div class="jumbotron">
+    <%= form_with(model: [ @company, @employee], local: true )  do |form| %>
+    <div class="form-group">
+      <%= form.label :first_name, "First Name" %>
+      <%= form.text_field :first_name, class:"form-control" %>
+    </div>
+    <div class="form-group">
+      <%= form.label :last_name, "Last Name" %>
+      <%= form.text_field :last_name, class:"form-control" %>
+    </div>
+    <div class="form-group">
+      <%= form.label :email, "Email" %>
+      <%= form.text_field :email, class:"form-control" %>
+    </div>
+    <div class="form-group">
+      <%= form.label :area, "Area" %>
+      <%= form.select :area_id, @areas.collect{ |area| [area.name, area.id] }, prompt: "Select Area" %>
+    </div>
+      <%= form.submit "Hire Employee", class:"btn btn-success" %>
+    <% end %>
+  </div>
+</div>
+
+<div class="container">
+  <h2>Employees List</h2>
+  <table class="table table-striped">
+    <thead>
+      <th>First Name</th>
+      <th>Last Name</th>
+      <th>Email</th>
+      <th>Area</th>
+    </thead>
+    <tbody>
+      <% @company.employees.each do |employee| %>
+      <tr>
+        <td><%= employee.first_name %></td>
+        <td><%= employee.last_name %></td>
+        <td><%= employee.email %></td>
+        <td><%= employee.area.name %></td>
+        <td><td><%= link_to 'Destroy', company_employee_path(@company, employee ), method: :delete %></td></td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

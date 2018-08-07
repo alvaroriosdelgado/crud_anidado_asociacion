@@ -1,0 +1,41 @@
+<p id="notice"><%= notice %></p>
+
+<div class="container">
+  <h1>Companies</h1>
+  <div class="jumbotron">
+    <table class="table">
+      <thead>
+        <tr>
+          <th class="col">Compnay Name</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @companies.each do |company| %>
+          <tr>
+            <td><%= company.name %>
+              <table class="table">
+                <thead>
+                  <th>Area name</th>
+                  <th>N° Employees</th>
+                </thead>
+                <tbody>
+                  <% @areas.each do |area| %>
+                    <tr>
+                      <td><%= area.name %></td>
+                      <td></td>
+                    </tr>
+                  <% end %>
+                </tbody>
+              </table>
+            </td>
+            <td><%= link_to 'Show', company %></td>
+            <td><%= link_to 'Edit', edit_company_path(company) %></td>
+            <td><%= link_to 'Destroy', company, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <%= link_to 'New Company', new_company_path, class:"btn btn-success" %>
+  </div>
+</div>
